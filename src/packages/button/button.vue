@@ -1,9 +1,14 @@
 <template>
-  <div class="qqw-button" :class="btnClasses">
+  <button 
+    class="qqw-button" 
+    :class="btnClasses" 
+    :disabled="loading" 
+    @click="$emit('handleClick',$event)">
+    <qqw-icon :icon="icon" class="icon" v-if="icon"></qqw-icon>
     <span v-if="this.$slots.default">
       <slot></slot>
     </span>
-  </div>
+  </button>
 </template>
 
 <script>
@@ -14,22 +19,43 @@ export default {
       type: String,
       default: "",
       validator: (val) => {
-        if (val && !['primary','success','warning','danger','info'].includes(val)) {
-          console.error(`必须包含${['primary','success','warning','danger','info'].join('、')}几种类型`)
+        if (
+          val &&
+          !["primary", "success", "warning", "danger", "info"].includes(val)
+        ) {
+          console.error(
+            `必须包含${["primary", "success", "warning", "danger", "info"].join(
+              "、"
+            )}几种类型`
+          );
         }
-        return true
+        return true;
       },
     },
+    icon: {
+      type: String,
+    },
+    iconPosition: {
+      type: String,
+      default: "left",
+    },
+    loading: {
+      type: Boolean,
+      default: false,
+    },
   },
-  computed:{
-    btnClasses(){
-      const arr = []
-      if(this.type){
-        arr.push(`qqw-button-${this.type}`)
+  computed: {
+    btnClasses() {
+      const arr = [];
+      if (this.type) {
+        arr.push(`qqw-button-${this.type}`);
       }
-      return arr
-    }
-  }
+      if (this.iconPosition) {
+        arr.push(`qqw-button-${this.iconPosition}`);
+      }
+      return arr;
+    },
+  },
 };
 </script>
 
@@ -66,26 +92,69 @@ $active-color: #3a8ee6;
   }
   /* $type:键
   $color：值 */
-  @each $type,$color in (primary:$primary,success:$success,warning:$warning,danger:$danger,info:$info){
-    &-#{$type}{
+  @each $type,
+    $color
+      in (
+        primary: $primary,
+        success: $success,
+        warning: $warning,
+        danger: $danger,
+        info: $info
+      )
+  {
+    &-#{$type} {
+      background: #{$color};
+      border: 1px solid #{$color};
+      color: #fff;
+      fill: #fff;
+    }
+  }
+  @each $type,
+    $color
+      in (
+        primary: $primary-hover,
+        success: $success-hover,
+        warning: $warning-hover,
+        danger: $danger-hover,
+        info: $info-hover
+      )
+  {
+    &-#{$type}:hover {
       background: #{$color};
       border: 1px solid #{$color};
       color: #fff;
     }
   }
-  @each $type,$color in (primary:$primary-hover,success:$success-hover,warning:$warning-hover,danger:$danger-hover,info:$info-hover){
-    &-#{$type}:hover{
+  @each $type,
+    $color
+      in (
+        primary: $primary-active,
+        success: $success-active,
+        warning: $warning-active,
+        danger: $danger-active,
+        info: $info-active
+      )
+  {
+    &-#{$type}:active {
       background: #{$color};
       border: 1px solid #{$color};
       color: #fff;
     }
   }
-  @each $type,$color in (primary:$primary-active,success:$success-active,warning:$warning-active,danger:$danger-active,info:$info-active){
-    &-#{$type}:active{
-      background: #{$color};
-      border: 1px solid #{$color};
-      color: #fff;
+  .icon + span {
+    margin-left: 8px;
+  }
+  &-right {
+    .icon {
+      order: 2;
     }
+    span {
+      order: 1;
+      margin-right: 8px;
+    }
+  }
+  &[disabled] {
+    cursor: not-allowed;
   }
 }
 </style>
