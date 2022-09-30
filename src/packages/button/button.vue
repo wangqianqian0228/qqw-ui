@@ -3,7 +3,7 @@
     class="qqw-button" 
     :class="btnClasses" 
     :disabled="loading" 
-    @click="$emit('handleClick',$event)">
+    @click="$emit('click',$event)">
     <qqw-icon :icon="icon" class="icon" v-if="icon"></qqw-icon>
     <span v-if="this.$slots.default">
       <slot></slot>
@@ -12,6 +12,7 @@
 </template>
 
 <script>
+import Icon from '../icon/icon.vue'
 export default {
   name: "qqw-button",
   props: {
@@ -56,6 +57,9 @@ export default {
       return arr;
     },
   },
+  components:{
+    'qqw-icon':Icon
+  }
 };
 </script>
 

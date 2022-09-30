@@ -1,19 +1,26 @@
 import Button from './button/button'
-import Icon from './icon/icon'
+// import Icon from './icon/icon'
 import ButtonGroup from './button/button-group'
 import Col from './layout/col'
 import Row from './layout/row'
+import Dialog from './dialog/dialog.vue'
+import Input from './input/input.vue'
 
 
-
+const componentsName = [
+  Button,
+  ButtonGroup,
+  Col,
+  Row,
+  Dialog,
+  Input
+]
 const install = (Vue) => {
-  Vue.component(Button.name,Button)
-  // Vue.component(Icon.name,Icon)
-  Vue.component(ButtonGroup.name,ButtonGroup)
-  Vue.component(Col.name,Col)
-  Vue.component(Row.name,Row)
+  componentsName.forEach((e) => {
+    Vue.component(e.name, e)
+  })
 }
-if(typeof window.Vue !== 'undefined'){
+if (typeof window.Vue !== 'undefined') {
   install(Vue)
 }
 /* <script src="Vue"></script>
