@@ -57,25 +57,38 @@
         <qqw-row :span="6"><div class="green">222</div></qqw-row>
       </qqw-col>
     </div> -->
-    <qqw-button type="primary" @click="visible=true">点击显示弹框</qqw-button>
+    <!-- <qqw-button type="primary" @click="visible=true">点击显示弹框</qqw-button>
     
     <qqw-dialog title="温馨提示" :visible.sync="visible" >
-      <!-- <template v-slot:title>
-       <h1>111</h1>
-      </template> -->
       122324324
       <template v-slot:footer>
         <qqw-button @click="visible=false">取消</qqw-button>
         <qqw-button type="primary" @click="visible=false">确定</qqw-button>
       </template>
-    </qqw-dialog>
+    </qqw-dialog> -->
+   <!--  v-model是一个语法糖： 
+   <input v-model="name" placeholder="请输入姓名"></input>
+   等价于:
+    <input :value="name" @input="name=$event.target.value" placeholder="请输入姓名"></input> 
+    name=$event.target.value 把文本框的值赋值给name
+    -->
+    <qqw-input 
+    v-model="name" 
+    placeholder="请输入姓名"
+    clearable
+    
+    ></qqw-input>
+    <qqw-input v-model="password" type="password" placeholder="请输入密码" showPassChange></qqw-input>
+
   </div>
 </template>
 <script>
 export default {
   data(){
     return {
-      visible:false
+      visible:false,
+      name:'',
+      password:''
     }
 
   },
@@ -108,4 +121,5 @@ export default {
   width: 80%;
   margin: 0 auto;
 }
+
 </style>
