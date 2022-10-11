@@ -5,6 +5,7 @@ import Col from './layout/col'
 import Row from './layout/row'
 import Dialog from './dialog/dialog.vue'
 import Input from './input/input.vue'
+import Switch from './switch/switch.vue'
 
 
 const componentsName = [
@@ -13,7 +14,8 @@ const componentsName = [
   Col,
   Row,
   Dialog,
-  Input
+  Input,
+  Switch
 ]
 const install = (Vue) => {
   componentsName.forEach((e) => {

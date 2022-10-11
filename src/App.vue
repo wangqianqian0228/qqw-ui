@@ -72,13 +72,15 @@
     <input :value="name" @input="name=$event.target.value" placeholder="请输入姓名"></input> 
     name=$event.target.value 把文本框的值赋值给name
     -->
-    <qqw-input 
+    <!-- <qqw-input 
     v-model="name" 
     placeholder="请输入姓名"
-    clearable
-    
+    clearable   
     ></qqw-input>
     <qqw-input v-model="password" type="password" placeholder="请输入密码" showPassChange></qqw-input>
+ -->
+    <qqw-switch v-model="active" activeColor="red" inactiveColor="green"></qqw-switch>
+    <qqw-switch v-model="active"></qqw-switch>
 
   </div>
 </template>
@@ -88,7 +90,8 @@ export default {
     return {
       visible:false,
       name:'',
-      password:''
+      password:'',
+      active:false
     }
 
   },
