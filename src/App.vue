@@ -81,10 +81,13 @@
  -->
     <qqw-switch v-model="active" activeColor="red" inactiveColor="green"></qqw-switch>
     <qqw-switch v-model="active"></qqw-switch>
-
+    <div>
+      <grandParent></grandParent>
+    </div>
   </div>
 </template>
 <script>
+import grandParent from './views/components/grandParent.vue'
 export default {
   data(){
     return {
@@ -110,6 +113,9 @@ export default {
   mounted() {
     this.pushHistory()
   },
+  components:{
+    grandParent
+  }
 };
 </script>
 
