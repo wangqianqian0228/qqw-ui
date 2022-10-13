@@ -12,6 +12,11 @@ props: 数据源（对象），校验规则（对象）
  */
 export default {
   name: "qqw-form",
+  provide() {
+    return {
+      form: this,
+    };
+  },
   props: {
     model: {
       type: Object,
@@ -36,9 +41,9 @@ export default {
     this.$on("on-form-item-add", function (filed) {
       this.fileds.push(filed);
     });
-    this.$on('on-form-item-remove',function(filed){
-      this.fileds.splice(this.fileds.indexOf(filed),1)
-    })
+    this.$on("on-form-item-remove", function (filed) {
+      this.fileds.splice(this.fileds.indexOf(filed), 1);
+    });
     console.log("fileds", this.fileds);
   },
   mounted() {},

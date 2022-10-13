@@ -4,7 +4,8 @@
     <input
       :type="types"
       class="one-input_inner"
-      @input="handleChange"
+      @input="handleInput"
+      @blur="handleBlur"
       :placeholder="placeholder"
       :class="{ 'is-disabled': disabled }"
       :value="value"
@@ -28,8 +29,11 @@
 
 <script>
 import Icon from "../icon/icon.vue";
+import emitter from "@/utils/emmiter";
+
 export default {
   name: "qqw-input",
+  mixins: [emitter],
   props: {
     placeholder: {
       type: String,
@@ -59,7 +63,7 @@ export default {
   data() {
     return {
       icon: "yanjing_bi",
-      types:this.type
+      types: this.type,
     };
   },
 
@@ -75,15 +79,20 @@ export default {
     change() {
       // this.showPassChange = !this.showPassChange
       if (this.icon === "yanjing_kai") {
-        this.types='password'
+        this.types = "password";
         this.icon = "yanjing_bi";
       } else if (this.icon === "yanjing_bi") {
-        this.types='text'
+        this.types = "text";
         this.icon = "yanjing_kai";
       }
     },
-    handleChange(e) {
+    handleInput(e) {
+      // 将值送给form-item触发事件。
       this.$emit("input", e.target.value);
+      this.dispatch("qqw-form-item", "on-form-change", e.target.value);
+    },
+    handleBlur(e) {
+      this.dispatch("qqw-form-item", "on-form-blur", e.target.value);
     },
     clear() {
       this.$emit("input", "");
