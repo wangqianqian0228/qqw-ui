@@ -66,7 +66,7 @@
         <qqw-button type="primary" @click="visible=false">确定</qqw-button>
       </template>
     </qqw-dialog> -->
-   <!--  v-model是一个语法糖： 
+    <!--  v-model是一个语法糖： 
    <input v-model="name" placeholder="请输入姓名"></input>
    等价于:
     <input :value="name" @input="name=$event.target.value" placeholder="请输入姓名"></input> 
@@ -79,43 +79,72 @@
     ></qqw-input>
     <qqw-input v-model="password" type="password" placeholder="请输入密码" showPassChange></qqw-input>
  -->
-    <qqw-switch v-model="active" activeColor="red" inactiveColor="green"></qqw-switch>
+    <!--  <qqw-switch
+      v-model="active"
+      activeColor="red"
+      inactiveColor="green"
+    ></qqw-switch>
     <qqw-switch v-model="active"></qqw-switch>
     <div>
       <grandParent></grandParent>
+    </div> -->
+
+    <div>
+      <qqw-form :model="formValidate" :rules="ruleValidate">
+        <qqw-form-item label="姓名" prop="name">
+          <qqw-input v-model="formValidate.name"></qqw-input>
+        </qqw-form-item>
+        <qqw-form-item label="邮箱" prop="mail">
+          <qqw-input v-model="formValidate.mail"></qqw-input>
+        </qqw-form-item>
+      </qqw-form>
     </div>
   </div>
 </template>
 <script>
-import grandParent from './views/components/grandParent.vue'
+import grandParent from "./views/components/grandParent.vue";
+import FormItem from "./packages/form/form-item.vue";
 export default {
-  data(){
+  data() {
     return {
-      visible:false,
-      name:'',
-      password:'',
-      active:false
-    }
-
+      visible: false,
+      name: "",
+      password: "",
+      active: false,
+      // 数据源
+      formValidate: {
+        name: "",
+        mail: "",
+      },
+      // 校验规则
+      ruleValidate: {
+        name: [{ required: true, message: "用户名不能为空", trigger: "blur" }],
+        mail: [
+          { required: true, message: "邮箱不能为空", trigger: "blur" },
+          { type: "mail", message: "邮箱格式不对", trigger: "blur" },
+        ],
+      },
+    };
   },
   methods: {
-    closeDialog(value){
-      this.visible = value
+    closeDialog(value) {
+      this.visible = value;
     },
-    pushHistory(){
+    pushHistory() {
       const state = {
-        title:'title',
-        url:'#'
-      }
-      window.history.pushState(state,'title','#')
-    }
+        title: "title",
+        url: "#",
+      };
+      window.history.pushState(state, "title", "#");
+    },
   },
   mounted() {
-    this.pushHistory()
+    this.pushHistory();
   },
-  components:{
-    grandParent
-  }
+  components: {
+    grandParent,
+    "qqw-form-item": FormItem,
+  },
 };
 </script>
 
@@ -130,5 +159,4 @@ export default {
   width: 80%;
   margin: 0 auto;
 }
-
 </style>

@@ -6,6 +6,7 @@ import Row from './layout/row'
 import Dialog from './dialog/dialog.vue'
 import Input from './input/input.vue'
 import Switch from './switch/switch.vue'
+import Form from './form/form.vue'
 
 
 const componentsName = [
@@ -15,7 +16,8 @@ const componentsName = [
   Row,
   Dialog,
   Input,
-  Switch
+  Switch,
+  Form
 ]
 const install = (Vue) => {
   componentsName.forEach((e) => {
