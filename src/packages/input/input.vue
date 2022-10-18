@@ -89,10 +89,10 @@ export default {
     handleInput(e) {
       // 将值送给form-item触发事件。
       this.$emit("input", e.target.value);
-      this.dispatch("qqw-form-item", "on-form-change", e.target.value);
+      this.dispatch("qqw-form-item", "on-form-change");
     },
     handleBlur(e) {
-      this.dispatch("qqw-form-item", "on-form-blur", e.target.value);
+      this.dispatch("qqw-form-item", "on-form-blur");
     },
     clear() {
       this.$emit("input", "");

@@ -90,7 +90,7 @@
     </div> -->
 
     <div>
-      <qqw-form :model="formValidate" :rules="ruleValidate">
+      <qqw-form :model="formValidate" :rules="ruleValidate" ref="form">
         <qqw-form-item label="姓名" prop="name">
           <qqw-input v-model="formValidate.name"></qqw-input>
         </qqw-form-item>
@@ -98,6 +98,8 @@
           <qqw-input v-model="formValidate.mail"></qqw-input>
         </qqw-form-item>
       </qqw-form>
+      <qqw-button type="primary" @click="handleSubmit">提交</qqw-button>
+      <qqw-button type="primary" @click="handleReset">重置</qqw-button>
     </div>
   </div>
 </template>
@@ -121,12 +123,25 @@ export default {
         name: [{ required: true, message: "用户名不能为空", trigger: "blur" }],
         mail: [
           { required: true, message: "邮箱不能为空", trigger: "blur" },
-          { type: "mail", message: "邮箱格式不对", trigger: "blur" },
+          { type: "email", message: "邮箱格式不对", trigger: "blur" },
         ],
       },
     };
   },
   methods: {
+    // 表单的提交
+    handleSubmit() {
+      const validate = this.$refs.form.validate();
+      validate.then((value) => {
+        console.log("提交表单", value);
+        value[0] ? alert(value[1]) : alert("提交成功");
+      });
+    },
+    // 表单的重置
+    handleReset() {
+      // 所有表单重置
+      this.$refs.form.resetFields()
+    },
     closeDialog(value) {
       this.visible = value;
     },

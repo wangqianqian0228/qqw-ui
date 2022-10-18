@@ -12,6 +12,7 @@
 form-item：
 props: label: 标签文本;
        prop: 对应form里面的model里面的属性
+form-item只能对某一个表单进行校验，不能对所有表单进行校验，而进行全部校验功能需要在form中去完成。
  */
 import emitter from "@/utils/emmiter";
 import Schema from "async-validator";
@@ -43,7 +44,7 @@ export default {
   computed: {
     // 获取当前form-item要绑定的model数据
     fieldValue() {
-      return this.form[this.prop];
+      return this.form.model[this.prop];
     },
   },
   created() {
@@ -72,6 +73,7 @@ export default {
     },
     // 输入框改变事件，根据prop来判断对哪个属性进行校验
     onFiledChange() {
+      // console.log(111,this.fieldValue)
       this.validate("change");
     },
     // 失去焦点事件
@@ -89,7 +91,7 @@ export default {
       const descriptor = {};
       descriptor[this.prop] = this.getRules();
       const validator = new Schema(descriptor);
-      // console.log("validator", validator);
+      // console.log("descriptor", descriptor);
       const model = {};
       model[this.prop] = this.fieldValue;
       /**
@@ -101,7 +103,11 @@ export default {
         this.validateState = errors ? "error" : "success";
         this.validateMessage = errors ? errors[0].message : "";
       });
+      callback(this.validateMessage)
     },
+    resetField(){
+      this.form.model[this.prop] = '' // 可以自定义初始值
+    }
   },
 };
 </script>

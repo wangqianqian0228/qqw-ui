@@ -9,6 +9,7 @@
 /*
 form：
 props: 数据源（对象），校验规则（对象）
+fileds 缓存了所有的form-item，点击提交按钮和重置按钮，遍历所有form-item，然后调用form-item里面的validate方法。
  */
 export default {
   name: "qqw-form",
@@ -29,7 +30,7 @@ export default {
   },
   data() {
     return {
-      fileds: [],
+      fileds: [], // 用来缓存所有的form-item
     };
   },
 
@@ -48,7 +49,37 @@ export default {
   },
   mounted() {},
 
-  methods: {},
+  methods: {
+    // 表单的校验
+    validate(callback) {
+      let valid = false;
+      let count = 0;
+      return new Promise((resolve) => {
+        // 让form-item逐个校验
+        this.fileds.forEach((field) => {
+          field.validate("", (errors='') => {
+            if (errors) {
+              //errors: 校验错误的信息
+              valid = true;
+              resolve([valid,errors]);
+            }
+            if (++count === this.fileds.length) {
+              resolve([false,'']);
+              if (typeof callback === "function") {
+                callback(valid);
+              }
+            }
+          });
+        });
+      });
+    },
+    // 重置表单
+    resetFields(){
+      this.fileds.forEach((filed)=>{
+        filed.resetField()
+      })
+    }
+  },
 };
 </script>
 <style lang="less"></style>
