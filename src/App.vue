@@ -101,6 +101,10 @@
       <qqw-button type="primary" @click="handleSubmit">提交</qqw-button>
       <qqw-button type="primary" @click="handleReset">重置</qqw-button>
     </div>
+
+    <div>
+      <qqw-checkbox v-model="single">选项 1</qqw-checkbox>
+    </div>
   </div>
 </template>
 <script>

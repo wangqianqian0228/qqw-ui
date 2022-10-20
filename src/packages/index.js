@@ -7,6 +7,7 @@ import Dialog from './dialog/dialog.vue'
 import Input from './input/input.vue'
 import Switch from './switch/switch.vue'
 import Form from './form/form.vue'
+import checkBox from './checkbox/checkbox.vue'
 
 
 const componentsName = [
@@ -17,7 +18,8 @@ const componentsName = [
   Dialog,
   Input,
   Switch,
-  Form
+  Form,
+  checkBox
 ]
 const install = (Vue) => {
   componentsName.forEach((e) => {
