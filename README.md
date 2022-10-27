@@ -5,6 +5,8 @@
 
 form：
 主要做了这些事：依次对form-item进行校验，对所有form-item进行重置，但是具体的校验方法和重置方法都是在具体的form-item里面的写的。form-item可以能到具体的哪个item.`this.form.model[this.prop]`
+
+input框的change事件：value值改变的时候触发
 ## Project setup
 ```
 npm install

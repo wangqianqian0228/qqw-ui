@@ -105,14 +105,22 @@
     <div>
       <qqw-checkbox v-model="single">选项 1</qqw-checkbox>
     </div>
+
+    <dir>
+      <h3>动态渲染 .vue 文件的组件—— Display</h3>
+      <qqw-display :code="code"></qqw-display>
+    </dir>
   </div>
 </template>
 <script>
 import grandParent from "./views/components/grandParent.vue";
 import FormItem from "./packages/form/form-item.vue";
+import Display from "./views/components/qqw-display.vue";
+import defaultCode from "./utils/defaultcode";
 export default {
   data() {
     return {
+      code: defaultCode,
       visible: false,
       name: "",
       password: "",
@@ -130,6 +138,7 @@ export default {
           { type: "email", message: "邮箱格式不对", trigger: "blur" },
         ],
       },
+      single: false,
     };
   },
   methods: {
@@ -144,7 +153,7 @@ export default {
     // 表单的重置
     handleReset() {
       // 所有表单重置
-      this.$refs.form.resetFields()
+      this.$refs.form.resetFields();
     },
     closeDialog(value) {
       this.visible = value;
@@ -163,6 +172,7 @@ export default {
   components: {
     grandParent,
     "qqw-form-item": FormItem,
+    "qqw-display": Display,
   },
 };
 </script>
