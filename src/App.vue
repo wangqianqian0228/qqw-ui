@@ -102,14 +102,23 @@
       <qqw-button type="primary" @click="handleReset">重置</qqw-button>
     </div>
 
-    <div>
+    <!-- <div>
       <qqw-checkbox v-model="single">选项 1</qqw-checkbox>
-    </div>
+    </div> -->
 
-    <dir>
+    <!-- <div>
       <h3>动态渲染 .vue 文件的组件—— Display</h3>
       <qqw-display :code="code"></qqw-display>
-    </dir>
+    </div> -->
+
+    <div>
+      <qqw-button type="primary" @click="showFirstAlert"
+        >显示第一个提示框</qqw-button
+      >
+      <qqw-button type="primary" @click="showSecondAlert"
+        >显示第二个提示框</qqw-button
+      >
+    </div>
   </div>
 </template>
 <script>
@@ -142,6 +151,18 @@ export default {
     };
   },
   methods: {
+    showFirstAlert() {
+      this.$Alert.info({
+        content: "aaa",
+        duration: 5,
+      });
+    },
+    showSecondAlert() {
+      this.$Alert.info({
+        content: "bbb",
+        duration: 10,
+      });
+    },
     // 表单的提交
     handleSubmit() {
       const validate = this.$refs.form.validate();
