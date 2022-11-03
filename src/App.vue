@@ -119,6 +119,10 @@
         >显示第二个提示框</qqw-button
       >
     </div>
+
+    <div>
+      <qqw-table :columns="columnsArr" :data="dataArr"></qqw-table>
+    </div>
   </div>
 </template>
 <script>
@@ -126,6 +130,8 @@ import grandParent from "./views/components/grandParent.vue";
 import FormItem from "./packages/form/form-item.vue";
 import Display from "./views/components/qqw-display.vue";
 import defaultCode from "./utils/defaultcode";
+import table from "./packages/table/table.vue";
+import {columns,data} from "./packages/table/data";
 export default {
   data() {
     return {
@@ -148,6 +154,8 @@ export default {
         ],
       },
       single: false,
+      columnsArr: columns,
+      dataArr: data,
     };
   },
   methods: {
@@ -194,6 +202,7 @@ export default {
     grandParent,
     "qqw-form-item": FormItem,
     "qqw-display": Display,
+    "qqw-table": table,
   },
 };
 </script>
