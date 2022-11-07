@@ -88,7 +88,7 @@
     <div>
       <grandParent></grandParent>
     </div> -->
-
+    <!-- 
     <div>
       <qqw-form :model="formValidate" :rules="ruleValidate" ref="form">
         <qqw-form-item label="姓名" prop="name">
@@ -100,7 +100,7 @@
       </qqw-form>
       <qqw-button type="primary" @click="handleSubmit">提交</qqw-button>
       <qqw-button type="primary" @click="handleReset">重置</qqw-button>
-    </div>
+    </div> -->
 
     <!-- <div>
       <qqw-checkbox v-model="single">选项 1</qqw-checkbox>
@@ -111,18 +111,30 @@
       <qqw-display :code="code"></qqw-display>
     </div> -->
 
-    <div>
+    <!-- <div>
       <qqw-button type="primary" @click="showFirstAlert"
         >显示第一个提示框</qqw-button
       >
       <qqw-button type="primary" @click="showSecondAlert"
         >显示第二个提示框</qqw-button
       >
-    </div>
+    </div> -->
 
     <div>
-      <qqw-table :columns="columnsArr" :data="dataArr"></qqw-table>
+      <qqw-table
+        :columns="columnsArr"
+        :data="dataArr"
+      ></qqw-table>
     </div>
+
+    <!-- <div class="swiper-container">
+     <Swiper :options="swiperOption">
+      <SwiperSlide><img src="https://images.shobserver.com/news/690_390/2018/8/17/95466c97-3c83-4ee4-9d67-987f3f576925.jpg" alt="" style="height:200px"></SwiperSlide>
+      <SwiperSlide><img src="https://images.shobserver.com/export_img/2022/11/5/b5ddfe6c-3dd7-44fe-9013-72b96dd6dea6.jpg" alt="" style="height:200px"></SwiperSlide>
+      <SwiperSlide><img src="https://images.shobserver.com/export_img/2022/11/5/01e1554d-5083-46ec-bbd3-7f908d97b3c9.jpg" alt="" style="height:200px"></SwiperSlide>
+
+     </Swiper>
+    </div> -->
   </div>
 </template>
 <script>
@@ -131,10 +143,24 @@ import FormItem from "./packages/form/form-item.vue";
 import Display from "./views/components/qqw-display.vue";
 import defaultCode from "./utils/defaultcode";
 import table from "./packages/table/table.vue";
-import {columns,data} from "./packages/table/data";
+import { columns, data } from "./packages/table/data";
+// import Swiper from "swiper/js/swiper";
+import { Swiper, SwiperSlide } from 'vue-awesome-swiper/dist/vue-awesome-swiper';
+import "swiper/css/swiper.min.css";
 export default {
   data() {
     return {
+      imgList: [],
+      swiperOption: {
+        direction: "horizontal", // 滑动的方向(水平方向)
+        loop: true, // 是否循环
+        autoplay: {
+          delay: 3000, // 自动播放的时长
+        },
+        slidesPerView: 3, // 设置可视区一共显示几张图片,设置auto,设置auto为自适应;
+        centeredSlides: true, // 设置为true时,带有active-slide类名的图片会居中
+        // spaceBetween: 4, //  每张图片之间的间隔
+      },
       code: defaultCode,
       visible: false,
       name: "",
@@ -197,12 +223,16 @@ export default {
   },
   mounted() {
     this.pushHistory();
+    // console.log("swiper", Swiper);
+   
   },
   components: {
     grandParent,
     "qqw-form-item": FormItem,
     "qqw-display": Display,
     "qqw-table": table,
+    Swiper,
+    SwiperSlide
   },
 };
 </script>
@@ -218,4 +248,33 @@ export default {
   width: 80%;
   margin: 0 auto;
 }
+.swiper-wrapper {
+  // display:flex
+}
+.swiper-slide {
+  transition: 300ms;
+  transform: scale(0.8);
+  height: 200px;
+  // border: 1px solid;
+  img {
+    width: 100%;
+    height: 100%;
+  }
+}
+.swiper-slide-active{
+  transform: scale(1);
+}
+// 如果想要两边的图片显示时缩小加上一下css代码
+// 默认中间的图片会带有类名 : .swiper-slide-acive;
+// 默认中间的图片的上一张图片会带有类 名:  .swiper-slide-prev ;
+// 默认中间的图片的下一张会带有类名: .swiper-slide-next ;.
+// .swiper-slide-active {
+//   transform: scale(1.2);
+// }
+// .swiper-slide-next{
+//   transform: scale(.8);
+// }
+// .swiper-slide-prev{
+//   transform: scale(.8);
+// }
 </style>

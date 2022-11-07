@@ -15,7 +15,7 @@ props: label: 标签文本;
 form-item只能对某一个表单进行校验，不能对所有表单进行校验，而进行全部校验功能需要在form中去完成。
  */
 import emitter from "@/utils/emmiter";
-import Schema from "async-validator";
+// import Schema from "async-validator";
 export default {
   inject: ["form"],
   name: "qqw-form-item",

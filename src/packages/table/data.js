@@ -6,15 +6,64 @@ let columns = [{
         title: '年龄',
         key: 'age'
     },
+    // render函数写好了，咋用呢？
+    // 这里的render是一个普通的函数
+    // @params h createElement
+    // @params 第二个参数，是从render.js传过来的对象
+
     {
         title: '出生日期',
-        key: 'birthday'
+        render: (h, {
+            row
+        }) => {
+            const date = new Date(parseInt(row.birthday));
+            const year = date.getFullYear();
+            const month = date.getMonth() + 1;
+            const day = date.getDate();
+            const birthday = `${year}-${month}-${day}`;
+            return h('span', birthday);
+        }
     },
     {
         title: '地址',
         key: 'address'
     }, {
-        title: '操作'
+        title: '操作',
+        render: (h, {
+            row,
+            column,
+            index,
+            that
+        }) => {
+            if (index === that.editIndex) {
+                // 处于编辑状态
+                // 创建一个input，值改为当前行的值
+                return [
+                    h('button', '保存', {
+                        on: {
+                            click: () => {
+                                
+                            }
+                        }
+                    }),
+                    h('button', '取消')
+
+                ]
+            } else {
+                // 渲染编辑和取消按钮
+                return h('button', {
+                    on: {
+                        click: () => {
+                            that.editName = row.name
+                            that.editAge = row.age
+                            that.editBirthday = row.birthday
+                            that.address = row.address
+                            that.editIndex = index
+                        }
+                    }
+                }, '修改')
+            }
+        }
     }
 ]
 let data = [{
@@ -42,7 +91,7 @@ let data = [{
         address: '深圳市南山区深南大道'
     }
 ]
-export  {
+export {
     columns,
     data
 }
