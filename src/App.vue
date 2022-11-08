@@ -121,12 +121,11 @@
     </div> -->
 
     <div>
-      <qqw-table
-        :columns="columnsArr"
-        :data="dataArr"
-      ></qqw-table>
+      <qqw-table :columns="columnsArr" :data="dataArr"></qqw-table>
     </div>
-
+    <div>
+      <qqw-table-slot :columns="columnsSlot" :data="dataSlot"> </qqw-table-slot>
+    </div>
     <!-- <div class="swiper-container">
      <Swiper :options="swiperOption">
       <SwiperSlide><img src="https://images.shobserver.com/news/690_390/2018/8/17/95466c97-3c83-4ee4-9d67-987f3f576925.jpg" alt="" style="height:200px"></SwiperSlide>
@@ -143,9 +142,14 @@ import FormItem from "./packages/form/form-item.vue";
 import Display from "./views/components/qqw-display.vue";
 import defaultCode from "./utils/defaultcode";
 import table from "./packages/table/table.vue";
+import TableSlot from "./packages/table/table-slot.vue";
 import { columns, data } from "./packages/table/data";
+import { columnsSlot, dataSlot } from "./packages/table/data.slot";
 // import Swiper from "swiper/js/swiper";
-import { Swiper, SwiperSlide } from 'vue-awesome-swiper/dist/vue-awesome-swiper';
+import {
+  Swiper,
+  SwiperSlide,
+} from "vue-awesome-swiper/dist/vue-awesome-swiper";
 import "swiper/css/swiper.min.css";
 export default {
   data() {
@@ -182,6 +186,8 @@ export default {
       single: false,
       columnsArr: columns,
       dataArr: data,
+      columnsSlot: columnsSlot,
+      dataSlot: dataSlot,
     };
   },
   methods: {
@@ -224,15 +230,15 @@ export default {
   mounted() {
     this.pushHistory();
     // console.log("swiper", Swiper);
-   
   },
   components: {
     grandParent,
     "qqw-form-item": FormItem,
     "qqw-display": Display,
     "qqw-table": table,
+    "qqw-table-slot": TableSlot,
     Swiper,
-    SwiperSlide
+    SwiperSlide,
   },
 };
 </script>
@@ -261,7 +267,7 @@ export default {
     height: 100%;
   }
 }
-.swiper-slide-active{
+.swiper-slide-active {
   transform: scale(1);
 }
 // 如果想要两边的图片显示时缩小加上一下css代码
