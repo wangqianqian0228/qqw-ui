@@ -7,6 +7,7 @@ export default {
         render: Function,
         that: Object
     },
+    
     // 一个组件的render函数会自动执行
     // ctx: 一个上下文对象
     render: (h, ctx) => {

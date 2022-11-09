@@ -124,7 +124,38 @@
       <qqw-table :columns="columnsArr" :data="dataArr"></qqw-table>
     </div>
     <div>
-      <qqw-table-slot :columns="columnsSlot" :data="dataSlot"> </qqw-table-slot>
+      <qqw-table-slot :columns="columnsSlot" :data="dataSlot"> 
+        <template v-slot:name="{row,index}">
+          <!-- <input type="text"> -->
+          <span>{{row.name}}</span>
+        </template>
+        <template v-slot:age="{row,index}">
+          <!-- <input type="text"> -->
+          <span>{{row.age}}</span>
+        </template>
+
+        <template v-slot:birthday="{row,index}">
+          <!-- <input type="text"> -->
+          <span>{{row.birthday}}</span>
+        </template>
+
+        <template v-slot:address="{row,index}">
+          <!-- <input type="text"> -->
+          <span>{{row.address}}</span>
+        </template>
+
+        <template v-slot:action="{index}">
+          <!-- <input type="text"> -->
+          
+          <div v-if="index !== editIndex">
+            <button>编辑</button>
+          </div>
+          <div v-else>
+            <button>保存</button>
+            <button>取消</button>
+          </div>
+        </template>
+      </qqw-table-slot>
     </div>
     <!-- <div class="swiper-container">
      <Swiper :options="swiperOption">
@@ -188,6 +219,7 @@ export default {
       dataArr: data,
       columnsSlot: columnsSlot,
       dataSlot: dataSlot,
+      editIndex: -1
     };
   },
   methods: {
